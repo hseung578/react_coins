@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router";
 import { fetchCoinTickers } from "../api";
 import { useQuery } from "react-query";
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const animation = keyframes`
   0% {
@@ -88,7 +88,6 @@ function Price() {
   const { isLoading, data } = useQuery<PriceData>(["tickers", coinId], () =>
     fetchCoinTickers(coinId!)
   );
-  const change = data?.quotes.USD.percent_change_1h;
   return (
     <div>
       {isLoading ? (
