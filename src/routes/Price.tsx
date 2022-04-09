@@ -33,10 +33,11 @@ const PriceItem = styled.div<Seond>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.textColor};
-  color: black;
+  background-color: ${(props) => props.theme.cardBgColor};
+  color: ${(props) => props.theme.accentColor};
   padding: 10px 20px;
   border-radius: 10px;
+  border: 1px solid ${(props) => props.theme.accentColor};
   span:first-child {
     font-size: 10px;
     font-weight: 400;

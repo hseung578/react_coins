@@ -48,9 +48,10 @@ const Back = styled.button`
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.cardBgColor};
   padding: 10px 20px;
   border-radius: 10px;
+  border: 1px solid darkgrey;
 `;
 const OverviewItem = styled.div`
   display: flex;
@@ -79,9 +80,12 @@ const Tab = styled.span<{ isActive: boolean }>`
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.cardBgColor};
   padding: 7px 0px;
   border-radius: 10px;
+  border: 1px solid darkgrey;
+  border-color: ${(props) =>
+    props.isActive ? props.theme.accentColor : props.theme.textColor};
   color: ${(props) =>
     props.isActive ? props.theme.accentColor : props.theme.textColor};
   a {
