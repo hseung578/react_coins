@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useQuery } from "react-query";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
+import { useRecoilState } from "recoil";
+import { isDarkAtom } from "./../atoms";
 
 const Title = styled.h1`
   font-size: 48px;
@@ -42,6 +44,27 @@ const Back = styled.button`
     a {
       color: ${(props) => props.theme.accentColor};
     }
+  }
+`;
+
+const Toggle = styled.button`
+  position: absolute;
+  top: 4vh;
+  left: 95%;
+  width: 50px;
+  height: 50px;
+  transform: translateX(-50%);
+  transform: translateX(-50%);
+  background-color: ${(props) => props.theme.cardBgColor};
+  border: 1px solid darkgrey;
+  border-radius: 25px;
+  font-size: 30px;
+  padding: 0px;
+  color: transparent;
+  text-shadow: 0 0 0 ${(props) => props.theme.textColor};
+  &:hover {
+    color: yellow;
+    background-color: ${(props) => props.theme.textColor};
   }
 `;
 
@@ -152,6 +175,8 @@ interface PriceData {
 }
 
 function Coin() {
+  const [isDark, setDark] = useRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDark((prev) => !prev);
   const { coinId } = useParams();
   const { state } = useLocation() as RoutSate;
   const priceMatch = useMatch("/:coinId/price");
@@ -184,6 +209,7 @@ function Coin() {
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </Title>
+        <Toggle onClick={toggleDarkAtom}>{isDark ? "🌞" : "🌛"}</Toggle>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
