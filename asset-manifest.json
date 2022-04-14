@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/react_coins/static/js/main.c3a8cdc1.js",
+    "main.js": "/react_coins/static/js/main.c64363da.js",
     "index.html": "/react_coins/index.html",
-    "main.c3a8cdc1.js.map": "/react_coins/static/js/main.c3a8cdc1.js.map"
+    "main.c64363da.js.map": "/react_coins/static/js/main.c64363da.js.map"
   },
   "entrypoints": [
-    "static/js/main.c3a8cdc1.js"
+    "static/js/main.c64363da.js"
   ]
 }
