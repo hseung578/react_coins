@@ -68,7 +68,7 @@ interface PriceData {
       ath_date: string;
       ath_price: number;
       market_cap: number;
-      percent_change_1h: number;
+      percent_change_1h?: number;
       percent_change_1y: number;
       percent_change_6h: number;
       percent_change_7d: number;
@@ -97,19 +97,7 @@ function Price() {
   const { isLoading, data } = useQuery<PriceData>(["tickers", coinId], () =>
     fetchCoinTickers(coinId!)
   );
-  let change1h = 0;
-  let change24h = 0;
-  let change7d = 0;
-  let volum = 0;
-  let cap = 0;
 
-  if (data) {
-    change1h = data.quotes.USD.percent_change_1h;
-    change24h = data?.quotes.USD.percent_change_24h;
-    change7d = data?.quotes.USD.percent_change_7d;
-    volum = data?.quotes.USD.volume_24h;
-    cap = data?.quotes.USD.market_cap;
-  }
   return (
     <div>
       {isLoading ? (
@@ -119,19 +107,31 @@ function Price() {
           <PriceContainer>
             <PriceItem second="0.5s">
               <span>1h%:</span>
-              <Item isNegative={Math.sign(change1h)}>
+              <Item
+                isNegative={Math.sign(
+                  Number(data?.quotes.USD.percent_change_1h)
+                )}
+              >
                 {data?.quotes.USD.percent_change_1h}%
               </Item>
             </PriceItem>
             <PriceItem second="0.5s">
               <span>24h%:</span>
-              <Item isNegative={Math.sign(change24h)}>
+              <Item
+                isNegative={Math.sign(
+                  Number(data?.quotes.USD.percent_change_24h)
+                )}
+              >
                 {data?.quotes.USD.percent_change_24h}%
               </Item>
             </PriceItem>
             <PriceItem second="0.5s">
               <span>7d%:</span>
-              <Item isNegative={Math.sign(change7d)}>
+              <Item
+                isNegative={Math.sign(
+                  Number(data?.quotes.USD.percent_change_7d)
+                )}
+              >
                 {data?.quotes.USD.percent_change_7d}%
               </Item>
             </PriceItem>
@@ -139,7 +139,7 @@ function Price() {
           <PriceContainer>
             <PriceItem second="1s">
               <span>Volum(24h):</span>
-              <Item isNegative={Math.sign(volum)}>
+              <Item isNegative={Math.sign(Number(data?.quotes.USD.volume_24h))}>
                 $
                 {data?.quotes.USD.volume_24h.toLocaleString(undefined, {
                   maximumFractionDigits: 3,
@@ -148,7 +148,7 @@ function Price() {
             </PriceItem>
             <PriceItem second="1s">
               <span>Market_Cap:</span>
-              <Item isNegative={Math.sign(cap)}>
+              <Item isNegative={Math.sign(Number(data?.quotes.USD.market_cap))}>
                 ${data?.quotes.USD.market_cap.toLocaleString("ko-KR")}
               </Item>
             </PriceItem>
